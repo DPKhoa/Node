@@ -7,10 +7,14 @@ const path = require('path');
 const { query } = require('express');
 
 const route = require('./routes');
+const db = require('./config/db')
+
+//Connect to DB
+db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 //HTTP logger
-// app.use(morgan('combined'));
+ app.use(morgan('combined'));
 
 
 app.use(express.urlencoded({
@@ -25,7 +29,7 @@ app.engine('hbs', engine({
 
 }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 // console.log('PATH:', path.join(__dirname, 'resources/views'));
 
 
@@ -37,5 +41,5 @@ route(app);
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port  at http://localhost:${port}`);
+  console.log(`App listening on port  at http://localhost:${port}`);
 });
