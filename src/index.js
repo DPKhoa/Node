@@ -13,8 +13,8 @@ const db = require('./config/db')
 db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
-//HTTP logger
- app.use(morgan('combined'));
+  //HTTP logger
+  app.use(morgan('combined'));
 
 
 app.use(express.urlencoded({
