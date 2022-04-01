@@ -35,7 +35,7 @@ class CourseController {
     }
 //[GET]/courses/:id/edit
     edit(req, res, next) {
-      Course.findById(req.params.id)
+      Course(req.params.id)
       .then(course => res.render('courses/edit',{
         course: mongooseArray(course),
       }),
@@ -50,6 +50,12 @@ class CourseController {
       .then(() => res.redirect('/me/stored/courses'))
       .catch(next);
     }
+     //[DELETE]/courses/:id
+    destroy(req,res, next){
+        Course.deleteOne({_id: req.params.id})
+        .then(() => res.redirect('back'))
+        .catch(next)
+      }
 }
 
 module.exports = new CourseController();
